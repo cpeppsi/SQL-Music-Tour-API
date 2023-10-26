@@ -2,8 +2,7 @@
 const {
   Model
 } = require('sequelize');
-module.exports = (sequelize, {
-  type: DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   class Set_Time extends Model {
     /**
      * Helper method for defining associations.
