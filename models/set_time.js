@@ -9,24 +9,21 @@ module.exports = (sequelize, DataTypes) => {
   //    * This method is not a part of Sequelize lifecycle.
   //    * The `models/index` file will call this method automatically.
   //    */
-    static associate(models) {
+    static associate({ Band, Event, Stage }) {
       // define association here
+      Set_Time.belongsTo(Band, {
+        foreignKey: "band_id",
+        as: "band"
+      })
+      Set_Time.belongsTo(Event, {
+        foreignKey: "event_id",
+        as: "event"
+      })
+      Set_Time.belongsTo(Stage, {
+        foreignKey: "stage_id",
+        as: "stage"
+      })
     }
-  //   static associate({ Band, Event, Stage }) {
-  //     // define association here
-  //     Set_Time.belongsTo(Band, {
-  //       foreignKey: "band_id",
-  //       as: "band"
-  //     })
-  //     Set_Time.belongsTo(Event, {
-  //       foreignKey: "event_id",
-  //       as: "event"
-  //     })
-  //     Set_Time.belongsTo(Stage, {
-  //       foreignKey: "stage_id",
-  //       as: "stage"
-  //     })
-  //   }
   }
   Set_Time.init({
     set_time_id: {
@@ -36,14 +33,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     event_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: { model: 'Event', key: 'event_id' }
     },
     band_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: { model: 'Band', key: 'band_id' }
     },
     stage_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: { model: 'Stage', key: 'stage_id' }
     },
     start_time: {
